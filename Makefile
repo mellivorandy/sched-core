@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: MIT
 
+MAKEFLAGS += -j$(shell nproc)
+
 CC       ?= gcc
 CFLAGS   ?= -std=c11 -Wall -Wextra -O2 -Iinclude
 BUILD    ?= build
@@ -12,7 +14,7 @@ DEPS     := $(OBJS:.o=.d)
 
 all: $(BUILD)/$(TARGET)
 	@echo
-	@echo "Build completed: $(TARGET)"
+	@echo -e "\033[1;32mBuild completed: \033[0m" $(TARGET)
 
 $(BUILD)/$(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
