@@ -8,9 +8,13 @@ BreakBeforeBraces: Attach
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: None
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
 IndentCaseLabels: true
 ColumnLimit: 0
 PointerAlignment: Right
 SpacesBeforeTrailingComments: 1
+SpacesInCStyleCastParentheses: false
 SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
 ...
