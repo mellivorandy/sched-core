@@ -3,7 +3,7 @@
 MAKEFLAGS += -j$(shell nproc)
 
 CC       ?= gcc
-CFLAGS   ?= -std=c11 -Wall -Wextra -O2 -Iinclude
+CFLAGS   ?= -std=c11 -Wall -Wextra -Iinclude
 BUILD    ?= build
 TARGET   ?= sched-core
 
@@ -25,18 +25,22 @@ $(BUILD)/%.o: %.c
 
 -include $(DEPS)
 
-debug: CFLAGS := -std=c11 -Wall -Wextra -g -O0 -Iinclude
-debug: clean all
+debug:
+	$(MAKE) clean
+	$(MAKE) CFLAGS="$(CFLAGS) -O0" all
 
-release: CFLAGS := -std=c11 -Wall -Wextra -O3 -Iinclude
-release: clean all
+release:
+	$(MAKE) clean
+	$(MAKE) CFLAGS="$(CFLAGS) -O3" all
 
 run: all
 	./$(BUILD)/$(TARGET) EDF input/test1.txt
 
 clean:
-	rm -rf $(BUILD)
+	$(RM) -r $(BUILD) $(TARGET)
 
-rebuild: clean all
+rebuild:
+	$(MAKE) clean
+	$(MAKE) all
 
 .PHONY: all clean debug release run rebuild
