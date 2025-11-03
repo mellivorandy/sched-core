@@ -16,12 +16,12 @@ all: $(BUILD)/$(TARGET)
 	@echo
 	@echo -e "\033[1;32mBuild completed: \033[0m" $(TARGET)
 
-$(BUILD)/$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
-
 $(BUILD)/%.o: %.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
+
+$(BUILD)/$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
 
 -include $(DEPS)
 
