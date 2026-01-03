@@ -1,6 +1,9 @@
 # SPDX-License-Identifier: MIT
 
-MAKEFLAGS += -j$(shell nproc)
+NPROC := $(shell \
+	command -v nproc >/dev/null 2>&1 && nproc || sysctl -n hw.ncpu)
+
+MAKEFLAGS += -j$(NPROC)
 
 CC       ?= gcc
 CFLAGS   ?= -std=c11 -Wall -Wextra -Iinclude
