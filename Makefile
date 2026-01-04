@@ -6,16 +6,17 @@ NPROC := $(shell \
 MAKEFLAGS += -j$(NPROC)
 
 CC       ?= gcc
-CFLAGS   ?= -std=c11 -Wall -Wextra -Iinclude
+CPPFLAGS += -Iinclude
+CFLAGS   ?= -std=c11 -Wall -Wextra
 BUILD    ?= build
 TARGET   ?= sched-core
 
 ifdef DEBUG
-CFLAGS 	 += -DRTS_DEBUG
+CPPFLAGS += -DRTS_DEBUG
 endif
 
 ifdef NOCOLOR
-CFLAGS   += -DRTS_NO_COLOR
+CPPFLAGS += -DRTS_NO_COLOR
 endif
 
 SRC_DIRS ?= src src/core src/utils src/queue src/sched
@@ -29,7 +30,7 @@ all: $(BUILD)/$(TARGET)
 
 $(BUILD)/%.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS) -MMD -MP -c $< -o $@
 
 $(BUILD)/$(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
