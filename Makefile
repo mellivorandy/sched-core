@@ -8,6 +8,7 @@ MAKEFLAGS += -j$(NPROC)
 CC       ?= gcc
 CPPFLAGS += -Iinclude
 CFLAGS   ?= -std=c11 -Wall -Wextra
+LDLIBS   := -lm
 BUILD    ?= build
 TARGET   ?= sched-core
 
@@ -33,7 +34,7 @@ $(BUILD)/%.o: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) -MMD -MP -c $< -o $@
 
 $(BUILD)/$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
 
 -include $(DEPS)
 
