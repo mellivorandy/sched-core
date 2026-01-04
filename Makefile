@@ -18,8 +18,8 @@ ifdef NOCOLOR
 CFLAGS   += -DRTS_NO_COLOR
 endif
 
-SRC_DIRS ?= src/core src/utils src/queue src/sched
-SRCS     := main.c $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+SRC_DIRS ?= src src/core src/utils src/queue src/sched
+SRCS     := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 OBJS     := $(SRCS:%.c=$(BUILD)/%.o)
 DEPS     := $(OBJS:.o=.d)
 
