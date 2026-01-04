@@ -10,6 +10,14 @@ CFLAGS   ?= -std=c11 -Wall -Wextra -Iinclude
 BUILD    ?= build
 TARGET   ?= sched-core
 
+ifdef DEBUG
+CFLAGS 	 += -DRTS_DEBUG
+endif
+
+ifdef NOCOLOR
+CFLAGS   += -DRTS_NO_COLOR
+endif
+
 SRC_DIRS ?= src/core src/utils src/queue src/sched
 SRCS     := main.c $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 OBJS     := $(SRCS:%.c=$(BUILD)/%.o)
